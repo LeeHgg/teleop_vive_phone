@@ -1,82 +1,119 @@
-# IsaacSim과 Conty3.x 연동 방법
+# **휴대폰 및 VIVE 기반 기술교시**
 
-## 개요
+## **개요**
 
-Conty3.0과 IsaacSIM 시뮬레이터를 연동하기 위한 방법입니다. 사용 시 문의 사항이나 버그 발생 시 아래 담당자에게 연락해 주시기 바랍니다.
+휴대폰 또는 VIVE 기반으로 기술교시를 진행하는 방법에 대한 안내입니다. 녹화된 데이터를 분석해 해당 디바이스의 성능 평가를 진행할 수 있습니다.
 
-* 담당자: 이윤동 매니저
+---
 
-#### [아이작심 다운로드](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/index.html) ※ Isaac Sim V4.0.0 사용 필요
+## **1. 디바이스 세팅**
 
-## neuromeka-isaacsim 패키지 설치
-* pip를 사용하여 neuromeka-isaacsim 패키지를 설치합니다.
-```bash
-pip3 install neuromeka-isaacsim
-```
-* 다음 명령어를 통해 Isaac Sim에서 불러올 수 있는 .usd 파일과 usd 파일에서 사용되는 extension 폴더를 설치합니다.
-```bash
-neuromeka-isaacsim-install
-```
+### **휴대폰**
 
-## STEP에서 스크립트 실행하기
+ **HelloAR Java 애플리케이션 실행** - 애플리케이션 상단에 **Server IP**를 입력 후 연결합니다.
 
-Isaac Sim과 Conty를 연동하기 위해서는 로봇을 실행해야 합니다.
+<img src="images/app.png" width="250" />
 
-#### SSH 터미널 및 파일 전송 프로그램 (무료): [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)
+### **VIVE**
 
-### STEP 터미널 접속
->![MobaXterm 초기 화면](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/coppeliasim/MobaXterm_SSH_%EC%97%B0%EA%B2%B0.png)  
-시뮬레이션을 실행할 STEP의 IP 주소를 입력하여 STEP에 접속합니다.
+**SteamVR 실행** - SteamVR에서 VIVE 장치가 정상적으로 켜져 있는지 확인합니다.
 
-### STEP의 Username, Password 입력
->![MobaXterm 로그인 화면](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/coppeliasim/ID_PW.png)  
-(login as : root, password : root)
+<img src="images/steamVR.png" width="250" />
 
-### 시뮬레이션 로봇 설정
-시뮬레이션을 위해선 EtherCAT 통신을 비활성화 해야합니다.
-```bash
-cd /home/user/release/IndyDeployment/
-```
->![Deployment경로](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/coppeliasim/Deployment%EA%B2%BD%EB%A1%9C.png)  
-1. 좌측 하단의 Follow terminal folder 버튼을 체크하여 폴더 구조를 확인합니다.
+---
 
->![indyDeploy.json](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/coppeliasim/indyDeploy_json.png)
-2. indyDeploy.json 파일을 열어 EtherCATCommTask의 Enable 값을 0으로 설정하고 저장합니다.  
+## **2. 서버 열기**
+
+- 터미널에서 다음 명령어를 실행합니다:
+    
+    ```bash
+    python teleop_server.py
+    ```
+    
+- 서버가 실행되며 **Server IP**가 출력됩니다.
+- 서버에서 다음 항목을 설정합니다:
+    - **디바이스 선택**: 휴대폰 또는 VIVE
+    - **데이터 저장 여부**: 저장할지 선택
+
+---
+
+## **3. Conty 연결**
+
+1. **Conty를 로봇과 연결**합니다.
+2. **설정** → **프로그램 환경** → **텔레오퍼레이션** 메뉴를 엽니다.
+3. **교시장치**를 **Vive**로 선택합니다.
+    
+    <img src="images/contyDevice.png" width="350" />
+4. **Server IP**와 **Port 번호**(20500)를 입력한 후, 서버와 연결합니다.
+    
+    <img src="images/contyConnect.png" width="350" />
+5. **테스트**: 교시장치의 위치 값을 확인하여 데이터가 변하는지 확인합니다.
+
+    <img src="images/contyValue.png" width="350" />
+
+## **4. 기술 교시**
+
+<img src="images/contyRecord.png" width="350" />
+
+### **캘리브레이션**
+- 디바이스를 로봇팔 말단에 위치시킨 후 **캘리브레이션 시작** 버튼을 클릭하면 캘리브레이션이 진행됩니다.
+
+### **녹화 시작**
+
+- **녹화 시작** 버튼을 눌러 기술교시를 시작합니다.
+
+- **스마트폰**
+
+    - **Enable** 버튼이 **파란색**이면 녹화 중, **회색** 버튼이 되면 일시 정지 상태입니다.
+    - 카메라가 가려지거나 서버와의 연결이 해제되면 녹화가 중단됩니다.
+
+- **VIVE**
+
+    - **메뉴 버튼**을 누르고 있는 동안 녹화가 진행되며, 버튼을 떼면 녹화가 일시 정지됩니다.
+
+### **모션 실행**
+- **저장된 모션**을 로봇에서 실행할 수 있습니다.
+
+---
+
+## **5. 저장된 데이터 분석 및 시각화**
+
+### **서버 종료**
+
+- **터미널에서 'q'를 입력**하여 서버를 종료합니다.
+
+    <img src="images/closeServer.png" width="350" />
 
 
+### **그래프 시각화**
+- 시각화는 다음 항목을 포함합니다:
+    - **경로 그래프**: x, y, z 위치의 3D 이동 경로
+    - **시간에 따른 위치 변화**: x, y, z의 position 그래프
+        - **파란색**: 로봇 위치 값
+        - **주황색**: 디바이스 입력 값
+- 데이터 시각화를 통해 경로와 위치 변화의 차이를 확인할 수 있습니다.
 
-### 파이썬 스크립트 실행
-프레임워크 실행
-```bash
-python3 /home/user/release/IndyDeployment/indy_run.py  
-```
+    <img src="images/graph.png" width="350" />
 
-## Isaac Sim 상에서 실행하기
 
-### Extension 활성화
-Isaac Sim과 Conty를 연동하는 데 필요한 Extension을 활성화해야 합니다.
+### **정량적 분석**
 
->![Extensions 위치](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/extensions+%EC%9C%84%EC%B9%98.png)  
-Isaac Sim 상단 메뉴 바의 **Window - Extensions**을 클릭하여 Extensions 윈도우를 엽니다.
+- 정량적 분석 결과는 아래 값을 포함합니다:
+    1. **x, y, z 위치 값에 대한 RMSE, DTW, Normalized DTW 값**
+    2. **위치 벡터의 평균 속도 및 가속도**
+    - 디바이스 입력 값과 로봇 위치 값을 대조하여 출력됩니다.
+    
+    <img src="images/calculate.png" width="350" />
 
->![Extension Autoload 설정](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/extension+autoload+%EC%84%A4%EC%A0%95.png)  
-Extensions 윈도우에서 왼쪽 창의 **THIRD PARTY** 탭을 선택하고, **omni.isaacsim_bridge.extension**이 있는 Extension을 클릭합니다.  
-브릿지 Extension의 활성화를 위해 오른쪽 창에서 DISABLED를 **ENABLED** 상태로 바꾸고, **AUTOLOAD** 체크박스에 체크합니다.
+---
 
-### conty_bridge.usd 실행 및 STEP과 연결
->![USD 경로](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/USD+%EA%B2%BD%EB%A1%9C+%EC%B0%BE%EA%B8%B0.png)  
-Isaac Sim 하단의 Content 창의 Path를 입력하는 창에 `C:\Users\<user name>\neuromeka-isaacsim`을 입력합니다.  
-해당 경로에 있는 파일 중 **conty_bridge.usd** 파일을 더블 클릭하여 불러옵니다.
+### **요구 사항**
 
-### Step IP 입력하기
->![STEP과 연결](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/USD+%EC%8B%A4%ED%96%89+%EC%9D%B4%ED%9B%84+STEP+IP+input.png)  
-conty_bridge.usd 파일이 로드되면 오른쪽 창 Stage 탭이 업데이트됩니다.
-업데이트 된 Stage 탭에서 **ActionGraph** 하위의 **isaacsimbridge**를 클릭합니다.  
-클릭하면 우측 하단 Property 탭이 업데이트 되고, Isaac_sim_bridge Node의 Inputs 안에 있는 **StepIP**에 STEP IP를 입력합니다.
-
-### 재생 버튼 클릭 후, Conty 3.x으로 로봇 제어하기
->![실행](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/%EC%8B%A4%ED%96%89.png)
-실행 버튼을 클릭하면 콘티와 실시간으로 연결됩니다.
-
->![실행 중](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/%EC%8B%A4%ED%96%89+%EC%A4%91.png) ![실행 중](https://s3.ap-northeast-2.amazonaws.com/internal.neuromeka.com/images/isaacsim/Conty+3.x+%EB%A1%9C%EB%B4%87+%EC%A0%9C%EC%96%B4.jpg)
-Conty 3.x로 로봇을 조작하면 실시간으로 Isaac Sim에서 렌더링되는 것을 확인할 수 있습니다.
+- 기술교시를 진행하기 위해 아래의 패키지와 라이브러리를 설치해야 합니다.
+    ```bash
+    pip install neuromeka numpy scipy openvr netifaces dtw dtaidistance matplotlib
+    ```
+    ```bash
+    pip install protobuf==3.19.4 grpcio==1.34.1 grpcio-tools==1.34.1
+    ```
+- 파이썬 버전 >= 3.7
