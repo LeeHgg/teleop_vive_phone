@@ -78,6 +78,7 @@
 ### **서버 종료**
 
 - **터미널에서 'q'를 입력**하여 서버를 종료합니다.
+
     <img src="images/closeServer.png" width="250" />
 
 
