@@ -40,21 +40,21 @@
 2. **설정** → **프로그램 환경** → **텔레오퍼레이션** 메뉴를 엽니다.
 3. **교시장치**를 **Vive**로 선택합니다.
     
-    <img src="images/contyDevice.png" width="250" />
+    <img src="images/contyDevice.png" width="350" />
 3. **교시장치**를 **Vive**로 선택합니다.
     
-    <img src="images/contyDevice.png" width="250" />
+    <img src="images/contyDevice.png" width="350" />
 4. **Server IP**와 **Port 번호**(20500)를 입력한 후, 서버와 연결합니다.
 
     
-    <img src="images/contyConnect.png" width="250" />
+    <img src="images/contyConnect.png" width="350" />
 5. **테스트**: 교시장치의 위치 값을 확인하여 데이터가 변하는지 확인합니다.
 
-    <img src="images/contyValue.png" width="250" />
+    <img src="images/contyValue.png" width="350" />
 
 ## **4. 기술 교시**
 
-<img src="images/contyRecord.png" width="250" />
+<img src="images/contyRecord.png" width="350" />
 
 ### **캘리브레이션**
 - 디바이스를 로봇팔 말단에 위치시킨 후 **캘리브레이션 시작** 버튼을 클릭하면 캘리브레이션이 진행됩니다.
@@ -83,7 +83,7 @@
 
 - **터미널에서 'q'를 입력**하여 서버를 종료합니다.
 
-    <img src="images/closeServer.png" width="250" />
+    <img src="images/closeServer.png" width="350" />
 
 
 ### **그래프 시각화**
@@ -93,7 +93,8 @@
         - **파란색**: 로봇 위치 값
         - **주황색**: 디바이스 입력 값
 - 데이터 시각화를 통해 경로와 위치 변화의 차이를 확인할 수 있습니다.
-<img src="images/graph.png" width="250" />
+
+    <img src="images/graph.png" width="350" />
 
 
 ### **정량적 분석**
@@ -102,8 +103,8 @@
     1. **x, y, z 위치 값에 대한 RMSE, DTW, Normalized DTW 값**
     2. **위치 벡터의 평균 속도 및 가속도**
     - 디바이스 입력 값과 로봇 위치 값을 대조하여 출력됩니다.
-
-    <img src="images/calculate.png" width="250" />
+    
+    <img src="images/calculate.png" width="350" />
 
 ---
 
