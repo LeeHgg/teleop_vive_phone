@@ -41,7 +41,11 @@
 3. **교시장치**를 **Vive**로 선택합니다.
     
     <img src="images/contyDevice.png" width="250" />
-4. **Server IP**와 **Port 번호**를 입력한 후, 서버와 연결합니다.
+3. **교시장치**를 **Vive**로 선택합니다.
+    
+    <img src="images/contyDevice.png" width="250" />
+4. **Server IP**와 **Port 번호**(20500)를 입력한 후, 서버와 연결합니다.
+
     
     <img src="images/contyConnect.png" width="250" />
 5. **테스트**: 교시장치의 위치 값을 확인하여 데이터가 변하는지 확인합니다.
@@ -53,7 +57,7 @@
 <img src="images/contyRecord.png" width="250" />
 
 ### **캘리브레이션**
-- **캘리브레이션 시작** 버튼을 클릭하여 설정을 완료합니다.
+- 디바이스를 로봇팔 말단에 위치시킨 후 **캘리브레이션 시작** 버튼을 클릭하면 캘리브레이션이 진행됩니다.
 
 ### **녹화 시작**
 
